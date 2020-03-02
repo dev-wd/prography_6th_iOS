@@ -1,0 +1,6 @@
+framework module Pods_prography_6th_iOS_prography_6th_iOSUITests {
+  umbrella header "Pods-prography_6th_iOS-prography_6th_iOSUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

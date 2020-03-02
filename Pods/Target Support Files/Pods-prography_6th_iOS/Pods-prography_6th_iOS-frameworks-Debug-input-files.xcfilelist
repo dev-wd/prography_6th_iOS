@@ -1,0 +1,5 @@
+${PODS_ROOT}/Target Support Files/Pods-prography_6th_iOS/Pods-prography_6th_iOS-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework
+${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework
+${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework
