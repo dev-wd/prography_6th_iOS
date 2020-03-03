@@ -18,27 +18,28 @@ class MainViewModel : MainViewBindable {
     private let movieRepository: MovieRepository = MovieRepository.shared
     
     var minrateText: BehaviorRelay<String>
-    var isLoading: PublishSubject<Bool>
+    var isLoading: BehaviorRelay<Bool>
     var responseStatus: PublishSubject<ResponseStatus>
     
     init() {
         minrateText = BehaviorRelay(value: "")
-        isLoading = PublishSubject.init()
+        isLoading = BehaviorRelay(value: true)
         responseStatus = PublishSubject.init()
     }
     
     func fetch() {
-        isLoading.onNext(true)
+        isLoading.accept(false)
         let minrate = Int(minrateText.value)
         
         movieRepository.fetchRepository(minrate: minrate!) { error in
             if error == nil {
+                
+                self.isLoading.accept(true)
                 self.responseStatus.onNext(.success)
-                self.isLoading.onNext(false)
                 print("success")
             } else {
+                self.isLoading.accept(true)
                 self.responseStatus.onNext(.failed)
-                self.isLoading.onNext(false)
                 print("error")
             }
         }

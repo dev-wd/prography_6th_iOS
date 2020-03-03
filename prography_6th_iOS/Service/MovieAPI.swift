@@ -20,7 +20,6 @@ class MovieAPI: MovieAPIProtocol {
     func getMovieResponse(limit: Int, minrate: Int, completion: @escaping  (MovieResponse?, Error?)-> Void) {
         let parameters: [String: Int] = ["limit" : limit, "minimum_rating": minrate]
         
-        print("limit: ",limit," rating: ",minrate)
         
         Alamofire.request(
             movieUrl!,

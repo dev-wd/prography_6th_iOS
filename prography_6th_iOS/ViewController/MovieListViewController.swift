@@ -19,10 +19,11 @@ class MovieListViewController: UIViewController {
     @IBOutlet weak var tableRef: UITableView!
     
     var bag = DisposeBag()
-    
+    var sendingData: [String]?
     override func viewDidLoad() {
         super.viewDidLoad()
         bind(viewModel: MovieListViewModel())
+        layout()
     }
     // success 가 먼저 발생해도 이럼
     func bind(viewModel: MovieListViewBindable) {
@@ -34,6 +35,24 @@ class MovieListViewController: UIViewController {
             index, element, cell in
             cell.movieTitle.text = element.title
             cell.movieRate.text = String(element.rating!)
+            cell.selectionStyle = .none
         }.disposed(by: bag)
+    }
+    
+    func layout() {
+        tableRef.rx
+            .itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                let cell = self?.tableRef.cellForRow(at: indexPath) as? MovieCell
+                self!.sendingData = [(cell?.movieTitle.text)!, (cell?.movieRate.text)!]
+                self!.performSegue(withIdentifier: "detail", sender: self)
+                
+            }).disposed(by: bag)
+        tableRef.tableFooterView = UIView()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let vc = segue.destination as? MovieDetailViewController else {return}
+        vc.data = self.sendingData
     }
 }

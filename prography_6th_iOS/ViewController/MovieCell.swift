@@ -31,8 +31,8 @@ class MovieCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        //movieTitle.text = nil
-        // movieRate.text = nil
+        movieTitle.text = nil
+        movieRate.text = nil
         bag = DisposeBag()
     }
 

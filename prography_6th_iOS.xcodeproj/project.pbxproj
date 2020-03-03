@@ -26,6 +26,7 @@
 		EAF402E7240CBCCB00788B91 /* MovieListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF402E6240CBCCB00788B91 /* MovieListViewModel.swift */; };
 		EAF402E9240CC95100788B91 /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF402E8240CC95100788B91 /* MovieListViewController.swift */; };
 		EAF402EB240CD75500788B91 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF402EA240CD75500788B91 /* MovieCell.swift */; };
+		EAFBCF7D240D1D60000F512E /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFBCF7C240D1D60000F512E /* MovieDetailViewController.swift */; };
 		FF355F23CFF27AC891A07ED9 /* Pods_prography_6th_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EF6E94F3BE39EBD64CED989 /* Pods_prography_6th_iOSTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +80,7 @@
 		EAF402E6240CBCCB00788B91 /* MovieListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewModel.swift; sourceTree = "<group>"; };
 		EAF402E8240CC95100788B91 /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
 		EAF402EA240CD75500788B91 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		EAFBCF7C240D1D60000F512E /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +200,7 @@
 				EAD82B64240B7DDA007EF25D /* MainViewController.swift */,
 				EAF402E8240CC95100788B91 /* MovieListViewController.swift */,
 				EAF402EA240CD75500788B91 /* MovieCell.swift */,
+				EAFBCF7C240D1D60000F512E /* MovieDetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 				EAD82B65240B7DDA007EF25D /* MainViewController.swift in Sources */,
 				EAF402EB240CD75500788B91 /* MovieCell.swift in Sources */,
 				EAD82B9C240B7EA7007EF25D /* MovieResponse.swift in Sources */,
+				EAFBCF7D240D1D60000F512E /* MovieDetailViewController.swift in Sources */,
 				EAD82B6B240B7DDA007EF25D /* prography_6th_iOS.xcdatamodeld in Sources */,
 				EADD81AE240B809300740830 /* MovieAPI.swift in Sources */,
 				EAD82B61240B7DD9007EF25D /* AppDelegate.swift in Sources */,

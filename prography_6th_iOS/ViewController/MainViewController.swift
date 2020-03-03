@@ -12,7 +12,7 @@ import RxCocoa
 
 protocol MainViewBindable {
     var minrateText: BehaviorRelay<String> { get }
-    var isLoading: PublishSubject<Bool> { get }
+    var isLoading: BehaviorRelay<Bool> { get }
     var responseStatus: PublishSubject<ResponseStatus> { get }
     func fetch()
 }
@@ -21,10 +21,11 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var ratePicker: UIPickerView!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     let bag = DisposeBag()
-    var pickerData:[Int] = Array(0...10)
-
+    var pickerData:[Int] = Array(0...9)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,24 +39,34 @@ class MainViewController: UIViewController {
             .tap
             .subscribe{ _ in
                 viewModel.minrateText
-            .accept(String(self.ratePicker.selectedRow(inComponent: 0)))
-                viewModel.fetch()
-                let seconds = 4.0
-                DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-                    self.performSegue(withIdentifier: "next", sender: (Any).self)
+                    .accept(String(self.ratePicker.selectedRow(inComponent: 0)))
+                
+                if viewModel.isLoading.value == true {
+                    viewModel.fetch()
                 }
-                
-                
-                // 여기서 completion handling 하고 난 다음에 segue 넘겨줘야 한다.
-                
         }.disposed(by: bag)
+        
+        viewModel.responseStatus
+            .subscribe(onNext: { val in
+                self.performSegue(withIdentifier: "next", sender: (Any).self)
+            }).disposed(by: bag)
+        
+        viewModel.isLoading
+            .bind(to: indicator.rx.isHidden)
+            .disposed(by: bag)
     }
     
     func layout() {
         Observable.just(pickerData).bind(to: ratePicker.rx.itemTitles) { _, item in
             return "\(item)"
-        }
+        }.disposed(by: bag)
+        
+        nextButton.layer.cornerRadius = 7
+        nextButton.setTitleColor(UIColor.white, for: .normal)
+        nextButton.layer.shadowColor = UIColor.black.cgColor
+        nextButton.layer.shadowRadius = 3
+        nextButton.layer.shadowOpacity = 0.4
+        nextButton.layer.shadowOffset = CGSize(width: 0, height: 3)
         
     }
 }
-
