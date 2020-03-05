@@ -10,5 +10,6 @@ import Foundation
 
 enum MovieError: Error {
     case networkError
-    case repositoryFetchError
+    case decodeError
+    case getRepositoryError
 }

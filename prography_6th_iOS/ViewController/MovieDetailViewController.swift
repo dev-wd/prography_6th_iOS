@@ -19,7 +19,6 @@ class MovieDetailViewController: UIViewController {
         super.viewDidLoad()
         movieTitle.text = data![0]
         movieRate.text = data![1]
-        // Do any additional setup after loading the view.
     }
 
 }

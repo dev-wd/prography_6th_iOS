@@ -12,7 +12,7 @@ import RxCocoa
 
 enum ResponseStatus {
     case success
-    case failed
+    case failed(Error)
 }
 class MainViewModel : MainViewBindable {
     private let movieRepository: MovieRepository = MovieRepository.shared
@@ -30,18 +30,15 @@ class MainViewModel : MainViewBindable {
     func fetch() {
         isLoading.accept(false)
         let minrate = Int(minrateText.value)
-        
         movieRepository.fetchRepository(minrate: minrate!) { error in
-            if error == nil {
-                
-                self.isLoading.accept(true)
-                self.responseStatus.onNext(.success)
-                print("success")
-            } else {
-                self.isLoading.accept(true)
-                self.responseStatus.onNext(.failed)
-                print("error")
+            guard error == nil else {
+                self.responseStatus.onNext(.failed(error!))
+                return
             }
+            self.isLoading.accept(true)
+            self.responseStatus.onNext(.success)
+            print("success")
+            
         }
     }
 }

@@ -48,7 +48,28 @@ class MainViewController: UIViewController {
         
         viewModel.responseStatus
             .subscribe(onNext: { val in
-                self.performSegue(withIdentifier: "next", sender: (Any).self)
+                switch val {
+                case .success:
+                    self.performSegue(withIdentifier: "next", sender: (Any).self)
+                case .failed(let error):
+                    var message = "Unknown Error"
+                    switch error {
+                    case MovieError.decodeError:
+                        message = "Decode String Error"
+                    case MovieError.networkError:
+                        message = "Network Error"
+                    default: break
+                    }
+                    
+                    let alert = UIAlertController(title: message, message: "", preferredStyle: UIAlertController.Style.alert)
+                    let cancel = UIAlertAction(title:"Cancel", style: .cancel)
+                    viewModel.isLoading.accept(true)
+                    alert.addAction(cancel)
+                    self.present(alert, animated: true, completion: nil)
+                @unknown default:
+                    print("unknown")
+                }
+                
             }).disposed(by: bag)
         
         viewModel.isLoading

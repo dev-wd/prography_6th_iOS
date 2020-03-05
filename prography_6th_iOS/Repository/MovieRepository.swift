@@ -22,7 +22,6 @@ class MovieRepository: MovieRepositoryProtocol {
     private init() { }
     
     func fetchRepository(minrate: Int, completion: @escaping (Error?) -> Void) {
-        
         api.getMovieResponse(limit: 10, minrate: minrate) { movieResponse , error in
             self.movieResponse = movieResponse
             completion(error)

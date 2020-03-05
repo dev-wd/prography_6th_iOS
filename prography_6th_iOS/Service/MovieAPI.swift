@@ -20,7 +20,6 @@ class MovieAPI: MovieAPIProtocol {
     func getMovieResponse(limit: Int, minrate: Int, completion: @escaping  (MovieResponse?, Error?)-> Void) {
         let parameters: [String: Int] = ["limit" : limit, "minimum_rating": minrate]
         
-        
         Alamofire.request(
             movieUrl!,
             method: .post,
@@ -36,11 +35,10 @@ class MovieAPI: MovieAPIProtocol {
                         let movieResponse = try JSONDecoder().decode(MovieResponse.self, from: data)
                         completion( movieResponse, nil )
                     } catch {
-                        completion( nil, error )
+                        completion( nil, MovieError.decodeError )
                     }
-                    
-                case .failure(let error):
-                    completion(nil, error)
+                case .failure(_):
+                    completion(nil, MovieError.networkError)
                 }
         }
     }

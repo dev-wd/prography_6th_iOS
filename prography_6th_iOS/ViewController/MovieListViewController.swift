@@ -25,11 +25,9 @@ class MovieListViewController: UIViewController {
         bind(viewModel: MovieListViewModel())
         layout()
     }
-    // success 가 먼저 발생해도 이럼
+    
     func bind(viewModel: MovieListViewBindable) {
         viewModel.getMovies()
-        
-        // 평점 소팅이 안되고 그 다음엔 publish 좀 더 공부하자
         
         viewModel.movies.bind(to: tableRef.rx.items(cellIdentifier: "cell", cellType: MovieCell.self)) {
             index, element, cell in
@@ -46,7 +44,6 @@ class MovieListViewController: UIViewController {
                 let cell = self?.tableRef.cellForRow(at: indexPath) as? MovieCell
                 self!.sendingData = [(cell?.movieTitle.text)!, (cell?.movieRate.text)!]
                 self!.performSegue(withIdentifier: "detail", sender: self)
-                
             }).disposed(by: bag)
         tableRef.tableFooterView = UIView()
     }

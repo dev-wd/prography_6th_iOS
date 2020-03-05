@@ -8,8 +8,6 @@
 
 import Foundation
 
-// Codable Porotocol을 뭘로 할지 한번 보자
-
 struct MovieResponse: Codable {
     let status: String?
     let statusMessage: String?
